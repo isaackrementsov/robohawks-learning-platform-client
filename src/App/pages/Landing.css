@@ -1,0 +1,25 @@
+.landing-main {
+    padding-top: 70px;
+    background: linear-gradient(115deg, #FF5252, #F50057);
+    height: 500px;
+    color: white;
+}
+
+nav li {
+    color: white;
+}
+
+nav li.left span {
+    color: white;
+}
+
+.cta {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: transparent;
+}
+.cta:hover {
+    color: #FF5252;
+    transition: 0.2s ease-in-out;
+    background-color: white;
+}

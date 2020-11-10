@@ -1,8 +1,9 @@
 body {
     margin: 0;
-    font-family: 'Oxygen', 'Arial', sans-serif;
+    font-family: 'Oxygen', 'Arial', sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 code {

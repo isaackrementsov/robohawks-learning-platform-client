@@ -1,61 +1,37 @@
-.horiz {
-    padding: 10px 10%;
-    color: #525252;
-    position: fixed;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.horiz li {
-    display: inline;
-    padding: 7px 15px;
-    padding-bottom: 10px;
-    margin: 5px 0;
-    margin-left: 10px;
-    float: right;
-    vertical-align: middle;
-    font-weight: 300;
-}
-
-.horiz li.left {
-    float: left;
-    font-size: 25px;
-    font-weight: bold;
-    font-family: 'Roboto Slab', serif;
-    font-weight: 900;
-    margin: 0;
-    color: #FF5252;
-}
-
-.horiz li * {
-    vertical-align: middle;
+nav {
+    z-index: 2;
 }
 
 nav img {
     height: 33px;
-    padding-right: 10px;
+    margin-right: 10px;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+nav #title {
+    color: #FF5252;
+    font-weight: 900;
+    font-family: 'Roboto Slab', serif;
+    font-size: 25px;
 }
 
-nav li.left img {
-    height: 35px;
-    padding-right: 10px;
+a.nav-link {
+    padding: 6px 16px !important;
+    margin-left: 10px;
+    color: #3d3d3d !important;
+    font-weight: 300;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+a.nav-link.cta {
+    border: 1px solid #FF5252;
+    color: #FF5252 !important;
+    border-radius: 3px;
 }
 
-
-.cta {
+a.nav-link.cta:hover {
     background-color: #FF5252;
-    color: white;
-    border-radius: 5px;
+    color: white !important;
+}
+
+.navbar-brand >* {
+    vertical-align: middle;
 }

@@ -1,25 +1,60 @@
-.landing-main {
-    padding-top: 70px;
+.gradient {
+    position: relative;
+    padding-top: 70px !important;
     background: linear-gradient(115deg, #FF5252, #F50057);
-    height: 500px;
     color: white;
+    top: -70px;
+    height: 600px;
 }
 
-nav li {
-    color: white;
+.gradient >* {
+    position: absolute;
+    margin: 0 50px !important;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
-nav li.left span {
-    color: white;
+.row.center {
+    align-items: center;
 }
 
-.cta {
-    border: 1px solid white;
-    border-radius: 5px;
-    background-color: transparent;
+.jumbotron h1 {
+    font-weight: bold;
 }
-.cta:hover {
-    color: #FF5252;
-    transition: 0.2s ease-in-out;
+
+.jumbotron p {
+    color: whitesmoke;
+    font-weight: 300;
+    font-size: 20px;
+    margin: 20px 0;
+    line-height: 33px;
+}
+
+.jumbotron img {
+    max-height: 300px;
+    max-width: 40vw;
+    box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2);
+}
+
+a.nav-link {
+    color: whitesmoke !important;
+}
+
+a.nav-link:hover {
+    color: white !important;
+}
+
+a.nav-link.cta {
+    border-color: white;
+    color: white !important;
+}
+
+a.nav-link.cta:hover {
     background-color: white;
+    color: #FF5252 !important;
+}
+
+#title {
+    color: white !important;
 }

@@ -32,7 +32,7 @@
 }
 
 .jumbotron img {
-    max-height: 300px;
+    max-height: 450px;
     max-width: 40vw;
     box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2);
 }
@@ -46,15 +46,20 @@ a.nav-link:hover {
 }
 
 a.nav-link.cta {
-    border-color: white;
+    border: 1px solid white;
     color: white !important;
+    background-color: transparent !important;
 }
 
 a.nav-link.cta:hover {
-    background-color: white;
+    background-color: white !important;
     color: #FF5252 !important;
 }
 
 #title {
     color: white !important;
+}
+
+#landing {
+    box-shadow: none;
 }

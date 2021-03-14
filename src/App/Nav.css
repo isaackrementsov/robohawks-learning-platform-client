@@ -22,9 +22,9 @@ a.nav-link {
 }
 
 a.nav-link.cta {
-    border: 1px solid #FF5252;
-    color: #FF5252 !important;
+    color: white !important;
     border-radius: 3px;
+    background-color: #FF5252 !important;
 }
 
 a.nav-link.cta:hover {

@@ -3,6 +3,7 @@ import Nav from '../Nav';
 import './Landing.css';
 
 export default class Landing extends Component {
+
     render(){
         return (
             <div className="App">
@@ -17,11 +18,12 @@ export default class Landing extends Component {
                             </p>
                         </div>
                         <div className="col-md-6">
-                            <img src="/img/landing.png" alt="Landing"/>
+                            <img src="/img/landing.png" alt="Landing" id="landing"/>
                         </div>
                     </div>
                 </div>
             </div>
         );
     }
+    
 }

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import Nav from '../Nav';
-import './Landing.css';
+import NonAuth from '../components/NonAuth';
+import Nav from '../components/Nav';
+import './Gradient.css';
 
-export default class Landing extends Component {
+export default class Landing extends NonAuth {
 
     render(){
         return (
-            <div className="App">
+            <div className="App gradient-app" style={{height: '100vh'}}>
                 <Nav logo={'logo-white'}/>
                 <div className="jumbotron jumbotron-fluid gradient">
                     <div className="row center">
@@ -25,5 +25,5 @@ export default class Landing extends Component {
             </div>
         );
     }
-    
+
 }

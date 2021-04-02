@@ -1,17 +1,37 @@
 import React, { Component } from 'react';
+import { FaPlus } from 'react-icons/fa';
+
 import './Nav.css';
+import auth from '../../auth.js';
 
 export default class Nav extends Component {
 
-    componentDidMount(){
-        let loggedIn = localStorage.getItem('loggedIn') != null;
-        this.setState({loggedIn})
+    constructor(props){
+        super(props)
+
+        this.state = {};
+        this.logout = this.logout.bind(this);
+        this.state = auth.createState();
+
     }
 
     render(){
-        if(this.props.loggedIn){
+        if(this.state.loggedIn){
             return (
-                <nav className="vert">
+                <nav className="nav flex-column">
+                    <a className="navbar-brand h1" href="/dashboard">
+                        <div className="logo-small">
+                            <img src="/img/logo.png" alt="logo"/>
+                            <span>LearnCVU</span>
+                        </div>
+                    </a>
+                    { this.state.instructor ?
+                        <a className="nav-link cta" href="/course/new"><FaPlus/><span>Create Course</span></a>
+                        :
+                        <a className="nav-link cta" href="/course/all"><FaPlus/><span>Find Courses</span></a>
+                    }
+                    <a className="nav-link" href="/courses">Your Courses</a>
+                    <a onClick={this.logout} className="nav-link" style={{cursor: 'pointer'}}>Logout</a>
                 </nav>
             )
         }else{
@@ -37,6 +57,13 @@ export default class Nav extends Component {
                 </nav>
             )
         }
+    }
+
+    async logout(e){
+        e.preventDefault();
+
+        await auth.logout();
+        this.props.history.push('/login');
     }
 
 }

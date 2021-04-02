@@ -4,26 +4,18 @@
     background: linear-gradient(115deg, #FF5252, #F50057);
     color: white;
     top: -70px;
-    height: 600px;
+    height: 100%;
 }
 
-.gradient >* {
-    position: absolute;
-    margin: 0 50px !important;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
-.row.center {
+.gradient-app .row.center {
     align-items: center;
 }
 
-.jumbotron h1 {
+.gradient-app .jumbotron h1 {
     font-weight: bold;
 }
 
-.jumbotron p {
+.gradient-app .jumbotron p {
     color: whitesmoke;
     font-weight: 300;
     font-size: 20px;
@@ -31,35 +23,35 @@
     line-height: 33px;
 }
 
-.jumbotron img {
+.gradient-app .jumbotron img {
     max-height: 450px;
     max-width: 40vw;
     box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2);
 }
 
-a.nav-link {
+.gradient-app a.nav-link {
     color: whitesmoke !important;
 }
 
-a.nav-link:hover {
+.gradient-app a.nav-link:hover {
     color: white !important;
 }
 
-a.nav-link.cta {
+.gradient-app a.nav-link.cta {
     border: 1px solid white;
     color: white !important;
     background-color: transparent !important;
 }
 
-a.nav-link.cta:hover {
+.gradient-app a.nav-link.cta:hover {
     background-color: white !important;
     color: #FF5252 !important;
 }
 
-#title {
+.gradient-app #title {
     color: white !important;
 }
 
-#landing {
+.gradient-app #landing {
     box-shadow: none;
 }

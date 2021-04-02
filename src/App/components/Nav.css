@@ -32,6 +32,15 @@ a.nav-link.cta:hover {
     color: white !important;
 }
 
+a.nav-link.cta > * {
+    vertical-align: middle;
+}
+
+a.nav-link.cta svg {
+    margin-right: 5px;
+    height: 0.9em;
+}
+
 .navbar-brand >* {
     vertical-align: middle;
 }

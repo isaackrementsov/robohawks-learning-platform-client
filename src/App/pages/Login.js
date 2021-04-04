@@ -1,5 +1,5 @@
-import Nav from '../components/Nav';
-import Form from '../components/Form.js';
+import { Nav } from '../components/Nav';
+import Form from '../components/Form';
 import './Gradient.css';
 
 export default class Login extends Form {
@@ -18,7 +18,7 @@ export default class Login extends Form {
 
     render(){
         return (
-            <div className="App gradient-app" style={{height: '100vh'}}>
+            <div className="App gradient-app">
                 <Nav logo={'logo-white'}/>
                 <div className="jumbotron jumbotron-fluid gradient flex-container-center">
                     <form onSubmit={this.handleSubmit}>

@@ -5,6 +5,7 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import Account from './pages/Account';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -20,6 +21,7 @@ export default class App extends Component {
                     <Route exact path='/login' component={Login}/>
                     <Route exact path='/signup' component={Signup}/>
                     <Route exact path='/dashboard' component={Dashboard}/>
+                    <Route exact path='/account' component={Account}/>
                 </Switch>
             </div>
         )

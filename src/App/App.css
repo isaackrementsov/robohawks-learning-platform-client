@@ -2,6 +2,7 @@ body, html {
     position: relative;
     width: 100%;
     min-height: 100%;
+    height: 100%;
 }
 
 #root, #root > div, .App {
@@ -17,21 +18,38 @@ a:hover {
     text-decoration: none !important;
 }
 
+.App-flex {
+    display: flex;
+}
+
 .App >* {
     padding-right: 10%;
     padding-left: 10%;
 }
 
+.App-flex >* {
+    padding-right: 0;
+    padding-left: 0;
+}
+
 form {
      background-color: white;
-     padding: 20px 40px;
-     padding-top: 10px;
-     margin: auto;
+     padding: 0;
      color: black;
      border-radius: 3px;
      box-sizing: border-box;
-     width: 500px;
-     text-align: center;
+}
+
+form input[type='submit'] {
+    text-align: left;
+    padding: 8px 18px;
+}
+
+.jumbotron form {
+    padding: 20px 40px;
+    margin: auto;
+    text-align: center;
+    width: 500px;
 }
 
 form h1 {
@@ -41,6 +59,9 @@ form h1 {
 
 form > *, form input {
     display: block;
+}
+
+.jumbotron form > *, .jumbotron form input {
     width: 100%;
 }
 
@@ -57,6 +78,31 @@ input[type='text'], input[type='password'], input[type='email'] {
     border-radius: 3px;
     padding: 7px 10px;
     background-color: transparent;
+    min-width: 30%;
+}
+
+form .flex-container-between .label {
+    min-width: 48%;
+}
+
+form .flex-container-between .label input {
+    width: 100%;
+}
+
+form .flex-container-between {
+    max-width: 38%;
+}
+
+.jumbotron form .flex-container-between {
+    max-width: 100%;
+}
+
+.jumbotron form .flex-container-between .label {
+    width: 48%;
+}
+
+.jumbotron form input[type='submit'] {
+    text-align: center;
 }
 
 .label {
@@ -84,6 +130,7 @@ input[type='submit'], button {
 
 .flex-container-center, .flex-container-between {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .flex-container-center {
@@ -148,6 +195,12 @@ input[type='submit']:hover {
     transition: 0.2s ease-in-out;
 }
 
+.file-dropzone.disabled {
+    border-style: hidden;
+    background-color: transparent;
+    padding: 0;
+}
+
 input[type='password'] {
     letter-spacing: 0.45px;
 }
@@ -166,4 +219,42 @@ input[type='password'] {
 
 .error-label {
     color: #EF5350;
+}
+
+.content {
+    padding: 30px 50px;
+    flex-grow: 1;
+}
+
+input:disabled {
+    border-style: hidden;
+    padding: 0;
+}
+
+.edit-button {
+    background-color: transparent;
+    color: grey;
+    border-style: hidden;
+    padding: 0;
+}
+
+.edit-button svg {
+    height: 1.2em;
+    width: 1.2em;
+}
+
+.edit-button:hover {
+    color: darkslategrey;
+    transition: 0.5s ease-in-out;
+}
+
+.file-preview {
+    padding: 0;
+    margin: 0;
+}
+
+.file-preview img {
+    height: 25px;
+    border-radius: 100%;
+    margin-right: 10px;
 }

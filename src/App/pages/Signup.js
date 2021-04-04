@@ -1,7 +1,7 @@
 //import Files from 'react-files';
 
-import Nav from '../components/Nav';
-import Form from '../components/Form.js';
+import { Nav } from '../components/Nav';
+import Form from '../components/Form';
 import './Gradient.css';
 
 export default class Signup extends Form {
@@ -13,13 +13,12 @@ export default class Signup extends Form {
             ...this.state,
             ...{
                 data: {
-                    username: 'isaackrementsov',
-                    password: 'isaackrementsov',
-                    first_name: 'Isaac',
-                    last_name: 'Krementsov',
-                    email: 'isaackrementsov@gmail.com',
-                    instructor: false,
-                    file: null
+                    username: '',
+                    password: '',
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    instructor: false
                 },
                 res: {data: null}
             }
@@ -31,7 +30,7 @@ export default class Signup extends Form {
             <div className="App gradient-app">
                 <Nav logo={'logo-white'}/>
                 <div className="jumbotron jumbotron-fluid gradient flex-container-center">
-                    <form onSubmit={this.handleFileSubmit}>
+                    <form onSubmit={this.handleSubmit}>
                         <h1>Sign Up</h1>
                         <hr/>
                         {this.state.res.data && this.state.res.data.error &&
@@ -76,10 +75,10 @@ export default class Signup extends Form {
         );
     }
 
-    async handleFileSubmit(e){
+    async handleSubmit(e){
         e.preventDefault();
 
-        await super.handleFileSubmit(e);
+        await super.handleSubmit(e);
 
         if(this.state.res.data){
             if(this.state.res.data.auth_success){
@@ -90,22 +89,3 @@ export default class Signup extends Form {
     }
 
 }
-
-/*
-<div className="label file-dropzone-label">
-    Avatar
-    <Files
-      className='file-dropzone'
-      onChange={this.handleFileChange}
-      onError={this.handleFileError}
-      accepts={['image/png', 'image/jpg', 'image/svg', 'image/bmp']}
-      maxFileSize={10000000}
-      minFileSize={0}
-      clickable
-      required
-    >
-    Upload File
-    {this.state.filenames.length > 0 && <><hr/><span>{this.state.filenames[0]}</span></>}
-    </Files>
-</div>
-*/

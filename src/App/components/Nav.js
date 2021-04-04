@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { CgAdd } from 'react-icons/cg';
 
 import './Nav.css';
-import auth from '../../auth.js';
+import auth from '../../auth';
+import requests from '../../requests'
 
-export default class Nav extends Component {
+export class Nav extends Component {
 
     constructor(props){
         super(props)
@@ -22,16 +23,17 @@ export default class Nav extends Component {
                     <a className="navbar-brand h1" href="/dashboard">
                         <div className="logo-small">
                             <img src="/img/logo.png" alt="logo"/>
-                            <span>LearnCVU</span>
+                            <br/><p>LearnCVU</p>
                         </div>
                     </a>
                     { this.state.instructor ?
-                        <a className="nav-link cta" href="/course/new"><FaPlus/><span>Create Course</span></a>
+                        <a className="nav-link cta" href="/course/new"><CgAdd/><span>Create Course</span></a>
                         :
-                        <a className="nav-link cta" href="/course/all"><FaPlus/><span>Find Courses</span></a>
+                        <a className="nav-link cta" href="/course/all"><CgAdd/><span>Find Courses</span></a>
                     }
-                    <a className="nav-link" href="/courses">Your Courses</a>
-                    <a onClick={this.logout} className="nav-link" style={{cursor: 'pointer'}}>Logout</a>
+                    <a className="nav-link" href="/dashboard"><span>Dashboard</span></a>
+                    <a className="nav-link" href="/courses"><span>Your Courses</span></a>
+                    <a onClick={this.logout} className="nav-link" style={{cursor: 'pointer'}}><span>Logout</span></a>
                 </nav>
             )
         }else{
@@ -65,5 +67,32 @@ export default class Nav extends Component {
         await auth.logout();
         this.props.history.push('/login');
     }
+}
 
+export class PageHeader extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {avatar: auth.avatar()};
+    }
+
+    render(){
+        return (
+            <nav className="navbar navbar-expand-lg navbar-light horiz part-nav">
+                <div className="navbar-brand h1 mb-0">
+                    <span>{this.props.title}</span>
+                </div>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <a className="nav-link avatar" href="/account"><img src={requests.staticURL('/img/avatars/' + this.state.avatar)} alt="avatar"/></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        );
+    }
 }

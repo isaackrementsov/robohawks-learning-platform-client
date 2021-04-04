@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import auth from '../../auth.js';
+import auth from '../../auth';
 
 export default class NonAuth extends Component {
 

@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import auth from '../../auth.js';
-import requests from '../../requests.js';
+import auth from '../../auth';
+import requests from '../../requests';
 
-import { API_BASE } from '../../config.js';
+import { API_BASE } from '../../config';
 
 export default class Form extends Component {
 
@@ -10,7 +10,7 @@ export default class Form extends Component {
         super(props);
 
         this.connection = {url: url, method: method};
-        this.state = {filenames: [], url: API_BASE, method: 'POST', res: {}, nonAuth};
+        this.state = {filenames: [], url: API_BASE, res: {}, nonAuth};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,7 +20,7 @@ export default class Form extends Component {
 
     componentDidMount(){
         if(auth.loggedIn() && this.state.nonAuth){
-            this.props.history.push('/dashboard')
+            this.props.history.push('/dashboard');
         }
     }
 
@@ -30,8 +30,9 @@ export default class Form extends Component {
 
         if(e.target.type === 'checkbox'){
             val = !update.data[e.target.name];
+        }else{
+            update.data[e.target.name] = val;
         }
-        update.data[e.target.name] = val;
 
         this.setState(update);
     }
@@ -44,10 +45,16 @@ export default class Form extends Component {
 
     async handleFileSubmit(e){
         e.preventDefault();
+
+        // Submit JSON data without the file
         await this.handleSubmit(e);
+
+        const files = this.state.files
+        console.log(files);
         /*
-        if(this.state.data.file){
-            this.state.data.file = await this.toBase64(this.state.data.file);
+        if(files.length > 0){
+            // Submit file with multipart request
+            this.makeFileRequest(files);
         }
         */
     }
@@ -62,17 +69,36 @@ export default class Form extends Component {
         return res;
     }
 
+    async makeFileRequest(file){
+        const formData = new FormData();
+        formData.append('file', file, file.name);
+
+        let parts = this.connection.url.split('?');
+        const newURL = parts[0] + 'file?' + parts[1];
+
+        let res = await requests.makeMultipartRequest({
+            url: newURL,
+            method: this.connection.method,
+            data: file
+        });
+
+        return res;
+    }
+
     async buildSession(){
         let data = this.state.res.data;
-        
+
         if(data && data.auth_success){
-            await auth.buildSession(data.user_id, data.instructor, data.admin);
+            await auth.buildSession(data.user_id, data.instructor, data.admin, data.avatar);
         }
     }
 
     handleFileChange(files){
         if(files && files.length > 0){
-            this.setState({filenames: [files[0].name]});
+            let data = this.state.data;
+            data.files = files;
+
+            this.setState({filenames: files.map(f => f.name), data: data});
         }
     }
 
@@ -80,13 +106,4 @@ export default class Form extends Component {
         console.log('Error handling files!');
     }
 
-    toBase64(file){
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-    }
 }

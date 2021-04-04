@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import auth from '../../auth.js';
+import auth from '../../auth';
 
 export default class AuthProtected extends Component {
 
@@ -13,9 +13,5 @@ export default class AuthProtected extends Component {
             this.props.history.push('/login');
         }
     }
-
-    render(){
-        return <div className="App"></div>;
-    }
-
+    
 }

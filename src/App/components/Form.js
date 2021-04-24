@@ -10,11 +10,11 @@ export default class Form extends Component {
         super(props);
 
         this.connection = {url: url, method: method};
-        this.state = {filenames: [], url: API_BASE, res: {}, nonAuth};
+        this.state = {filenames: [], files: [], url: API_BASE, res: {data: null}, nonAuth};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleFileChange = this.handleFileChange.bind(this);
+        this.handleFilesChange = this.handleFilesChange.bind(this);
         this.handleFileSubmit = this.handleFileSubmit.bind(this);
     }
 
@@ -40,23 +40,21 @@ export default class Form extends Component {
     async handleSubmit(e){
         e.preventDefault();
         const res = await this.makeRequest();
+
         this.setState({res});
     }
 
     async handleFileSubmit(e){
         e.preventDefault();
 
-        // Submit JSON data without the file
-        await this.handleSubmit(e);
-
         const files = this.state.files
-        console.log(files);
-        /*
         if(files.length > 0){
             // Submit file with multipart request
-            this.makeFileRequest(files);
+            await this.makeFileRequest(files);
         }
-        */
+
+        // Submit JSON data without the file
+        await this.handleSubmit(e);
     }
 
     async makeRequest(){
@@ -69,17 +67,19 @@ export default class Form extends Component {
         return res;
     }
 
-    async makeFileRequest(file){
-        const formData = new FormData();
-        formData.append('file', file, file.name);
+    async makeFileRequest(files){
+        let formData = new FormData();
+        for(let i = 0; i < files.length; i++){
+            formData.append(`files[${i}]`, files[i]);
+        }
 
         let parts = this.connection.url.split('?');
-        const newURL = parts[0] + 'file?' + parts[1];
+        const newURL = parts[0] + 'files?' + parts[1];
 
         let res = await requests.makeMultipartRequest({
             url: newURL,
             method: this.connection.method,
-            data: file
+            data: formData
         });
 
         return res;
@@ -93,17 +93,28 @@ export default class Form extends Component {
         }
     }
 
-    handleFileChange(files){
-        if(files && files.length > 0){
-            let data = this.state.data;
-            data.files = files;
-
-            this.setState({filenames: files.map(f => f.name), data: data});
-        }
+    handleFilesChange(files){
+        this.setState({files});
     }
 
-    handleFileError(_files){
+    handleFilesError(_files){
         console.log('Error handling files!');
+    }
+
+    setError(msg){
+        let res = this.state.res;
+        res.error = msg;
+
+        this.setState({res});
+    }
+
+    setData(obj){
+        let data = {
+            ...this.state.data,
+            ...obj
+        };
+
+        this.setState({data});
     }
 
 }

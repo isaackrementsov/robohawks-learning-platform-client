@@ -10,7 +10,7 @@ export default class NonAuth extends Component {
 
     componentDidMount(){
         if(this.state.loggedIn){
-            this.props.history.push('/dashboard');
+            this.props.history.push(auth.homepage());
         }
     }
 

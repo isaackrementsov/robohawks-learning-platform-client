@@ -1,6 +1,7 @@
-import { Nav, PageHeader } from '../components/Nav';
-import AuthProtectedForm from '../components/AuthProtectedForm';
+import { PageLayout } from '../components/Nav';
+import { AuthProtectedForm } from '../components/AuthProtectedForm';
 import requests from '../../requests';
+import auth from '../../auth';
 
 import { CgPen, CgCloseO } from 'react-icons/cg';
 import Files from 'react-files';
@@ -15,7 +16,6 @@ export default class Account extends AuthProtectedForm {
 
         this.state = {
             ...this.state,
-            res: {data: null},
             editing: false,
             data: {
                 username: '',
@@ -40,77 +40,73 @@ export default class Account extends AuthProtectedForm {
 
     render(){
         return (
-            <div className="App App-flex">
-                <Nav history={this.props.history}/>
-                <div className="content">
-                    <PageHeader title={'Account Details'}/>
-                    <button className="edit-button" onClick={this.setEdit}>{this.state.editing ? <CgCloseO/> : <CgPen/>}</button>
-                    <form onSubmit={this.handleFileSubmit}>
-                        {this.state.res.data && this.state.res.data.error &&
-                            <div className="label error-label">
-                                {this.state.res.data.error}
-                            </div>
-                        }
-                        <div className="flex-container-between">
-                            <div className="label">
-                                First Name
-                                <input type="text" name="first_name" value={this.state.data.first_name} onChange={this.handleChange} disabled={!this.state.editing} required/>
-                            </div>
-                            <div className="label">
-                                Last Name
-                                <input type="text" name="last_name" value={this.state.data.last_name} onChange={this.handleChange} disabled={!this.state.editing} required/>
-                            </div>
+            <PageLayout history={this.props.history} title="Account Details">
+                <button className="edit-button" onClick={this.setEdit}>{this.state.editing ? <CgCloseO/> : <CgPen/>}</button>
+                <form onSubmit={this.handleFileSubmit}>
+                    {this.state.res.data && this.state.res.data.error &&
+                        <div className="label error-label">
+                            {this.state.res.data.error}
                         </div>
-                        <div className="flex-container-between">
-                            <div className="label">
-                                Username
-                                <input type="text" name="username" value={this.state.data.username} onChange={this.handleChange} disabled={!this.state.editing} required/>
-                            </div>
-                            <div className="label">
-                                Email
-                                <input type="email" name="email" value={this.state.data.email} onChange={this.handleChange} disabled={!this.state.editing} required/>
-                            </div>
+                    }
+                    <div className="flex-container-between">
+                        <div className="label">
+                            First Name
+                            <input type="text" name="first_name" value={this.state.data.first_name} onChange={this.handleChange} disabled={!this.state.editing} required/>
                         </div>
-                        <div className="flex-container-between">
-                            <div className="label">
-                                Password
-                                <input type="password" name="password" value={this.state.data.password} onChange={this.handleChange} disabled={!this.state.editing} required/>
-                            </div>
-                            <div className="label file-dropzone-label">
-                                Avatar
-                                <Files
-                                  className={'file-dropzone' + (this.state.editing ? '' : ' disabled')}
-                                  onChange={this.handleFileChange}
-                                  onError={this.handleFileError}
-                                  accepts={['image/png', 'image/jpg', 'image/svg', 'image/bmp']}
-                                  maxFileSize={10000000}
-                                  minFileSize={0}
-                                  clickable={this.state.editing}
-                                  required
-                                >
-                                    {this.state.editing ?
-                                        <>
-                                            Change File
-                                            {this.state.files.length > 0 && <>
-                                                    <hr/><p className="file-preview avatar-preview">
-                                                        <img src={this.state.files[0].preview.url} alt="prev"/>
-                                                        <span>{this.state.files[0].name}</span>
-                                                    </p>
-                                            </>}
-                                        </>
-                                        :
-                                        <p className="file-preview avatar-preview">
-                                            <img src={requests.staticURL('/img/avatars/' + this.state.data.avatar)} alt="prev"/>
-                                            <span>{this.state.data.avatar}</span>
-                                        </p>
-                                    }
-                                </Files>
-                            </div>
+                        <div className="label">
+                            Last Name
+                            <input type="text" name="last_name" value={this.state.data.last_name} onChange={this.handleChange} disabled={!this.state.editing} required/>
                         </div>
-                        {this.state.editing && <input type="submit" value="Save Changes"/>}
-                    </form>
-                </div>
-            </div>
+                    </div>
+                    <div className="flex-container-between">
+                        <div className="label">
+                            Username
+                            <input type="text" name="username" value={this.state.data.username} onChange={this.handleChange} disabled={!this.state.editing} required/>
+                        </div>
+                        <div className="label">
+                            Email
+                            <input type="email" name="email" value={this.state.data.email} onChange={this.handleChange} disabled={!this.state.editing} required/>
+                        </div>
+                    </div>
+                    <div className="flex-container-between">
+                        <div className="label">
+                            Password
+                            <input type="password" name="password" value={this.state.data.password} onChange={this.handleChange} disabled={!this.state.editing} required/>
+                        </div>
+                        <div className="label file-dropzone-label">
+                            Avatar
+                            <Files
+                              className={'file-dropzone' + (this.state.editing ? '' : ' disabled')}
+                              onChange={this.handleFilesChange}
+                              onError={this.handleFilesError}
+                              accepts={['image/png', 'image/jpg', 'image/svg', 'image/bmp', 'image/jpeg']}
+                              maxFileSize={10000000}
+                              minFileSize={0}
+                              clickable={this.state.editing}
+                              required
+                            >
+                                {this.state.editing && 'Change File'}
+                                {(this.state.files.length > 0 && this.state.editing) && <hr/>}
+                                {(this.state.files.length > 0 || !this.state.editing) &&
+                                    <div className="file-preview avatar-preview">
+                                        <div
+                                            className="av-circle"
+                                            style={{
+                                                background: this.state.editing
+                                                    ? requests.cssURL(this.state.files[0].preview.url)
+                                                    : requests.cssStaticURL('/img/avatars/' + this.state.data.avatar)
+                                            }}
+                                            alt="prev"
+                                        />
+                                        <span>{this.state.editing ? this.state.files[0].name : this.state.data.avatar}</span>
+                                    </div>
+                                }
+                            </Files>
+                        </div>
+                    </div>
+                    {this.state.editing && <input type="submit" value="Save Changes"/>}
+                </form>
+            </PageLayout>
         );
     }
 
@@ -119,6 +115,7 @@ export default class Account extends AuthProtectedForm {
 
         let res = this.state.res;
         if(res.data && (!res.data.error && res.data.data)){
+            auth.update(res.data.data.avatar);
             this.setState({data: res.data.data, editing: false});
         }
     }

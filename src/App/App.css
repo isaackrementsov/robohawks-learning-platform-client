@@ -57,7 +57,7 @@ form h1 {
     margin-top: 20px;
 }
 
-form > *, form input {
+form > *, form input, form textarea {
     display: block;
 }
 
@@ -73,7 +73,7 @@ form hr {
     margin: 10px;
 }
 
-input[type='text'], input[type='password'], input[type='email'] {
+input[type='text'], input[type='password'], input[type='email'], select {
     border: 1px solid lightgrey;
     border-radius: 3px;
     padding: 7px 10px;
@@ -128,7 +128,7 @@ input[type='submit'], button {
     color: white;
 }
 
-.flex-container-center, .flex-container-between {
+.flex-container-center, .flex-container-between, .flex-container {
     display: flex;
     flex-wrap: wrap;
 }
@@ -145,7 +145,7 @@ input[type='submit'], button {
     margin: 0;
 }
 
-input:focus, button:focus {
+input:focus, button:focus, select:focus {
     outline: none;
     transition: 0.5s ease;
 }
@@ -155,7 +155,7 @@ input[type='submit']:hover {
     transition: 0.5s ease;
 }
 
-.label input:focus {
+.label input:focus, .label select:focus {
     border-color: #F50057;
     color: #F50057;
     transition: 0.5s ease;
@@ -229,6 +229,7 @@ input[type='password'] {
 input:disabled {
     border-style: hidden;
     padding: 0;
+    color: grey;
 }
 
 .edit-button {
@@ -253,8 +254,103 @@ input:disabled {
     margin: 0;
 }
 
-.file-preview img {
+.file-preview > * {
+    vertical-align: middle;
+}
+
+.file-preview > div {
+    display: inline-block;
     height: 25px;
-    border-radius: 100%;
+    width: 25px;
+}
+
+.file-preview > div {
     margin-right: 10px;
+}
+
+.av-circle {
+    border-radius: 100%;
+}
+
+nav .av-circle, .file-preview > div {
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.clear {
+    background-color: transparent;
+    border-style: hidden;
+}
+
+textarea {
+    background-color: transparent;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 300;
+}
+
+textarea:focus {
+    border-style: inherit !important;
+    outline: none;
+}
+
+button.non-cta {
+    border-style: hidden;
+    background-color: rgb(245,245,245);
+    color: rgb(100,100,100);
+    border-radius: 0;
+    margin: 10px 0;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: normal;
+}
+
+.label.inline {
+    padding: 7px 10px;
+    padding-left: 0;
+    display: inline-block;
+    padding-top: 0;
+    margin: 0;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+.label.inline > * {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+}
+
+.label.inline svg {
+    padding-right: 4px;
+    margin-right: 3px;
+    border-right: 1px solid lightgrey;
+}
+
+select {
+    min-width: 0;
+}
+
+.label.inline select {
+    min-width: 0;
+    border-style: hidden;
+}
+
+.vertical-center {
+    align-items: center;
+}
+
+.constrained-section .label {
+    width: 40%;
+}
+
+.constrained-section input {
+    width: 100%;
+}
+
+.pointer {
+    cursor: pointer;
 }

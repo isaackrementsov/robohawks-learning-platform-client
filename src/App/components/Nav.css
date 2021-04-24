@@ -1,5 +1,6 @@
 nav {
     z-index: 2;
+    background-size: cover !important;
 }
 
 nav img {
@@ -99,6 +100,9 @@ nav.part-nav {
     margin-top: 30px;
     padding: 10px 0;
     margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 3px;
+    box-sizing: border-box;
 }
 
 nav.part-nav .navbar-brand span {
@@ -110,8 +114,50 @@ nav.part-nav > * {
     vertical-align: middle;
 }
 
-.avatar img {
-    border-radius: 100%;
+nav .av-circle {
     height: 40px;
+    width: 40px;
     border: 2px solid #F50057;
+}
+
+nav.flex-column a.nav-link.active:not(.cta) {
+    color: #F50057 !important;
+}
+
+nav .h1 input {
+    border-style: hidden;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+
+nav .course-header textarea {
+    border-style: hidden;
+    color: whitesmoke;
+    overflow-y: hidden;
+    resize: none;
+}
+
+nav .course-header > * {
+    margin: 5px 10px;
+}
+
+nav .course-header textarea:focus, nav .course-header input:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: 0.2s ease-in-out;
+}
+
+nav .course-header textarea, nav .course-header p {
+    font-size: 17px;
+    width: 500px;
+    max-width: 100%;
+}
+
+nav.part-nav .h1 {
+    flex: 1;
+}
+
+::placeholder {
+  color: inherit;
+  opacity: 0.5;
 }

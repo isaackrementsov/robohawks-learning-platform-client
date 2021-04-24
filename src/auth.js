@@ -9,6 +9,8 @@ const auth = {
         localStorage.setItem('avatar', avatar)
     },
 
+    update: avatar => localStorage.setItem('avatar', avatar),
+
     logout: async () => {
         if(auth.loggedIn()){
             localStorage.clear();
@@ -18,7 +20,7 @@ const auth = {
 
     loggedIn: () =>  JSON.parse(localStorage.getItem('loggedIn')) || false,
     userId: () => localStorage.getItem('userId'),
-    instructor: () => localStorage.getItem('instructor'),
+    instructor: () => JSON.parse(localStorage.getItem('instructor')) || false,
     admin: () => localStorage.getItem('admin'),
     avatar: () => localStorage.getItem('avatar'),
 
@@ -30,7 +32,9 @@ const auth = {
             admin: auth.admin(),
             avatar: auth.avatar()
         };
-    }
+    },
+
+    homepage: () => '/user/' + auth.userId()
 }
 
 export default auth;

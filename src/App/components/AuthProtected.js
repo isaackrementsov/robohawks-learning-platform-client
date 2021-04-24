@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import auth from '../../auth';
 
-export default class AuthProtected extends Component {
+export class AuthProtected extends Component {
 
     constructor(props){
         super(props);
@@ -13,5 +13,22 @@ export default class AuthProtected extends Component {
             this.props.history.push('/login');
         }
     }
-    
+
+    getUrlParam(){
+        let parts = window.location.pathname.split('/');
+        return parts[parts.length - 1]
+    }
+
+}
+
+export class InstructorProtected extends AuthProtected {
+
+    componentDidMount(){
+        super.componentDidMount();
+
+        if(!this.state.instructor){
+            this.props.history.push(auth.homepage());
+        }
+    }
+
 }

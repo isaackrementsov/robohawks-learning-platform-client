@@ -1,5 +1,6 @@
 import { Nav } from '../components/Nav';
 import Form from '../components/Form';
+import auth from '../../auth';
 import './Gradient.css';
 
 export default class Login extends Form {
@@ -52,7 +53,7 @@ export default class Login extends Form {
         if(this.state.res.data){
             if(this.state.res.data.auth_success){
                 await super.buildSession();
-                this.props.history.push('/dashboard');
+                this.props.history.push(auth.homepage());
             }
         }
     }

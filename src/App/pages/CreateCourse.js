@@ -1,7 +1,6 @@
 import { InstructorProtectedForm } from '../components/AuthProtectedForm';
 import { PageLayout } from '../components/Nav';
 import requests from '../../requests';
-import notion from '../../notion';
 
 import { CgImage, CgMathPlus, CgCheck } from 'react-icons/cg';
 import Files from 'react-files';
